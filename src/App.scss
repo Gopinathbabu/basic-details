@@ -1,0 +1,59 @@
+.App{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: blue;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: blue;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.content {
+  height: 100%;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  font-size: 30px;
+  &__addEmpButton {
+
+  }
+  &__header-text {
+    margin: 10px 0px 10px 0px;
+  }
+  &__allFields {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    // align-items: center;
+    // gap: 20px;
+    &:last-child {
+      margin-bottom: 20px;
+    }
+    &__fieldContainer {
+      display: flex;
+      flex-direction: column;
+      &__name {
+        font-size: 15px;
+        font-weight: unset;
+      }
+    }
+  }
+}

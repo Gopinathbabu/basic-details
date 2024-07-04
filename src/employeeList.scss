@@ -1,0 +1,33 @@
+.employee-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    &__trow {
+        text-align: center;
+        &__thead {
+            font-size: 20px;
+            white-space: nowrap;
+            padding: 0px 12px 0px 12px;
+        }
+        &__tdata {
+            font-size: 16px;
+            white-space: nowrap;
+            padding: 0px 12px 7px 12px;
+            &__edit-button {
+                border-radius: 6px;
+                padding: 5px 10px;
+                border: unset;
+                background-color: chartreuse;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            &__del-button {
+                border-radius: 6px;
+                padding: 5px 10px;
+                border: unset;
+                background-color: khaki;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        }
+    }
+}
