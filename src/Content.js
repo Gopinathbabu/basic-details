@@ -3,13 +3,13 @@ import { useState } from 'react';
 import ShowEmployeeList from './employeeList';
 
 const Content = () => {
-    const [empDetails, setEmpDetails] = useState(false);
+    // const [empDetails, setEmpDetails] = useState(false);
     const [addEmpDetails, setAddEmpDetails] = useState([]);
     const [countid, setCountid] = useState(0);
 
-    const handleAddEmpDetails = () => {
-        setEmpDetails(empDetails => !empDetails);
-    }
+    // const handleAddEmpDetails = () => {
+    //     setEmpDetails(empDetails => !empDetails);
+    // }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -60,30 +60,30 @@ const Content = () => {
     return (
         <main className='content'>
             <h1 className='content__header-text'>
-                Content of Details
-                </h1>
-            <button className='content__addEmpButton' onClick={() => handleAddEmpDetails()}>
+                Employee List
+            </h1>
+            {/* <button className='content__addEmpButton' onClick={() => handleAddEmpDetails()}>
                 Add Employee Details
-            </button>
-            { empDetails && (
+            </button> */}
+            {/* { empDetails && ( */}
                 <div className='content__allFields'> 
-                    <form onSubmit={(e) => handleSubmit(e)}>
-                        <div className='content__allFields__fieldContainer'>
-                            <label className='content__allFields__fieldContainer__name'>First Name</label>
-                            <input type='text' data-id={''} name='firstname' id='firstname' placeholder='First Name' required/>
+                    <form className='content__allFields__form' onSubmit={(e) => handleSubmit(e)}>
+                        <div className='content__allFields__form__fieldContainer'>
+                            <label className='content__allFields__form__fieldContainer__name'>First Name</label>
+                            <input className='content__allFields__form__fieldContainer__name__input-first' type='text' data-id={''} name='firstname' id='firstname' placeholder='First Name' required/>
                         </div>
-                        <div className='content__allFields__fieldContainer'>
-                            <label className='content__allFields__fieldContainer__name'>Last Name</label>
-                            <input type='text' name='lastname' id='lastname' placeholder='Last Name' required/>
+                        <div className='content__allFields__form__fieldContainer'>
+                            <label className='content__allFields__form__fieldContainer__name'>Last Name</label>
+                            <input className='content__allFields__form__fieldContainer__name__input-last' type='text' name='lastname' id='lastname' placeholder='Last Name' required/>
                         </div>
-                        <div className='content__allFields__fieldContainer'>
-                            <label className='content__allFields__fieldContainer__name'>Age</label>
-                            <input type='number' name='age' id='age' placeholder='Age' required/>
+                        <div className='content__allFields__form__fieldContainer'>
+                            <label className='content__allFields__form__fieldContainer__name'>Age</label>
+                            <input className='content__allFields__form__fieldContainer__name__input-age' type='number' name='age' id='age' placeholder='Age' required/>
                         </div>
-                        <input type='submit'/>
+                        <input className='content__allFields__form__fieldContainer__submit-button' type='submit'/>
                     </form>
                 </div>
-            )}
+            {/* )} */}
             { addEmpDetails.length > 0 && (
                 <ShowEmployeeList addEmpDetails={addEmpDetails} deletingEmp={deletingEmp} editEmp={editEmp} />
             )}
