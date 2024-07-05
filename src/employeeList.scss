@@ -18,7 +18,7 @@
             border-radius: 50%;
             border: unset;
             padding: 6px 10px;
-            margin-top: 4px;
+            margin-top: 5px;
             background-color: #5ae720;
             cursor: pointer;
         }
@@ -37,7 +37,7 @@
             &__thead {
                 font-size: 20px;
                 white-space: nowrap;
-                padding: 0px 12px 0px 12px;
+                padding: 0px 12px 12px 12px;
             }
             &__tdata {
                 font-size: 16px;
@@ -47,9 +47,14 @@
                     border-radius: 6px;
                     padding: 5px 10px;
                     border: unset;
-                    background-color: chartreuse;
+                    background-color: #f37305;
                     font-weight: bold;
                     font-size: 14px;
+                    cursor: pointer;
+                    svg {
+                        width: 30%;
+                        height: 30%;
+                    }
                 }
                 &__del-button {
                     border-radius: 6px;
@@ -58,6 +63,11 @@
                     background-color: khaki;
                     font-weight: bold;
                     font-size: 14px;
+                    cursor: pointer;
+                    svg {
+                        width: 20%;
+                        height: 20%;
+                    }
                 }
                 &__empty-state {
                     display: flex;
