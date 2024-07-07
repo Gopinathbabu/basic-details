@@ -30,7 +30,6 @@ const Content = () => {
     function handleSubmit(event) {
         event.preventDefault();
         const collectData = [];
-        console.log(addEmpDetails);
         if(localStorage.getItem("items") === null) {
             collectData.push({...addEmpDetails, 'id': 0});
             localStorage.setItem('items', JSON.stringify(collectData));
