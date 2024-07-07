@@ -21,6 +21,9 @@
             margin-top: 5px;
             background-color: #5ae720;
             cursor: pointer;
+            &:hover, &:focus {
+                background-color: #2e8908
+            }
         }
     }
     &__container {
@@ -55,6 +58,9 @@
                         width: 30%;
                         height: 30%;
                     }
+                    &:hover, &:focus {
+                        background-color: #9d5314;
+                    }
                 }
                 &__del-button {
                     border-radius: 6px;
@@ -67,6 +73,9 @@
                     svg {
                         width: 20%;
                         height: 20%;
+                    }
+                    &:hover, &:focus {
+                        background-color: #6a610d;
                     }
                 }
                 &__empty-state {

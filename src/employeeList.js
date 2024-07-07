@@ -28,6 +28,7 @@ const ShowEmployeeList = () => {
     if(addEmpDetails && addEmpDetails.length > 0) {
         table = JSON.parse(addEmpDetails).map((item, i) => (
                     <tr className='employee__container__trow' key={item.id} value={item.id}>
+                        <td className='employee__container__trow__tdata'>{i + 1}</td>
                         <td className='employee__container__trow__tdata'>{item.firstname}</td>
                         <td className='employee__container__trow__tdata'>{item.lastname}</td>
                         <td className='employee__container__trow__tdata'>{item.age}</td>
@@ -75,6 +76,7 @@ const ShowEmployeeList = () => {
                 <table>
                     <tbody>
                         <tr className='employee__container__trow'>
+                        <th className='employee__container__trow__thead'>S.No</th>
                             <th className='employee__container__trow__thead'>Firstname</th>
                             <th className='employee__container__trow__thead'>Lastname</th>
                             <th className='employee__container__trow__thead'>Age</th>
