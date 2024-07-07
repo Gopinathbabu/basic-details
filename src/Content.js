@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Content = () => {
-    const [addEmpDetails, setAddEmpDetails] = useState([]);
+    const [addEmpDetails, setAddEmpDetails] = useState({'firstname': '', 'lastname': '', 'age': ''});
+    const [disabledButton, setDisabledButton] = useState(true);
     const navigate = useNavigate();
     const search = useLocation().search;
     const id = new URLSearchParams(search).get("id");
@@ -13,61 +14,56 @@ const Content = () => {
             let editValues = JSON.parse(localStorage.getItem('items'));
             editValues.forEach((item, i) => {
                 if(Number(id) === Number(item.id)) {
-                    document.querySelector('#firstname').value = item.firstname;
-                    document.querySelector('#lastname').value = item.lastname;
-                    document.querySelector('#age').value = item.age;
-                    document.querySelector('#firstname').setAttribute('data-id', item.id); 
+                    setAddEmpDetails({'firstname': item.firstname, 'lastname': item.lastname, 'age': item.age}); 
                 }
             });
         }
     }, [id]);
 
+    const handleOnchange = (e) => {
+        const {name, value} = e.target;
+        setAddEmpDetails((prevValue) => {
+            return { ...prevValue, [name]: value}
+        });
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
-        let firstName = event.target.elements.firstname.value;
-        let lastName = event.target.elements.lastname.value;
-        let age = event.target.elements.age.value;
-        let a;
+        const collectData = [];
+        console.log(addEmpDetails);
         if(localStorage.getItem("items") === null) {
-            let allDetails = {'firstname' : firstName, 'lastname' : lastName, 'age' : age, 'id' : 0};
-            a = [...addEmpDetails, allDetails];
-            setAddEmpDetails(a);
-            localStorage.setItem('items', JSON.stringify(a));
+            collectData.push({...addEmpDetails, 'id': 0});
+            localStorage.setItem('items', JSON.stringify(collectData));
         }
         else {
-            let items = [];
+            let getAllItems = [];
             let newCountID = 0;
-            items = JSON.parse(localStorage.getItem('items'));
-            if(!id && items.length > 0 ) {
-                items.forEach((item, i, elm) => {
+            getAllItems = JSON.parse(localStorage.getItem('items'));
+            
+            if(!id && getAllItems.length > 0) {
+                getAllItems.forEach((item, i, elm) => {
                     if(elm.length - 1 === i) {
                         newCountID = (Number(item.id) + 1);
+                        getAllItems.push({...addEmpDetails, 'id': newCountID});
+                        localStorage.setItem('items', JSON.stringify(getAllItems));
                     }
                 });
-                let allDetails = {'firstname' : firstName, 'lastname' : lastName, 'age' : age, 'id' : newCountID};
-                a = [...addEmpDetails, allDetails];
-                setAddEmpDetails(a);
-                items.push(allDetails);
-                localStorage.setItem('items', JSON.stringify(items));
+            
             }
             else {
-                items.forEach((item, i, elm) => {
-                    if(Number(id) === Number(item.id)) {
-                        item.firstname = firstName;
-                        item.lastname = lastName;
-                        item.age = age;
+                getAllItems.forEach((item, i, elm) => {
+                    if(Number(id) === i) {
+                        item.firstname = addEmpDetails.firstname;
+                        item.lastname = addEmpDetails.lastname;
+                        item.age = addEmpDetails.age;
+                        localStorage.setItem('items', JSON.stringify(getAllItems));
                     }
                 });
-                setAddEmpDetails([...items]);
-                localStorage.setItem('items', JSON.stringify(items));
             }
         }
-        
+
+        setAddEmpDetails({'firstname': '', 'lastname': '', 'age': ''});
         navigate('/basic-details/');
-        document.querySelector('#firstname').value = '';
-        document.querySelector('#lastname').value = '';
-        document.querySelector('#age').value = '';
-        document.querySelector('#firstname').setAttribute('data-id', '');
     }
 
     return (
@@ -76,18 +72,18 @@ const Content = () => {
                 Add New Employee
             </h1>
             <div className='content__allFields'> 
-                <form className='content__allFields__form' onSubmit={(e) => handleSubmit(e)}>
+                <form className='content__allFields__form' id='form' onSubmit={(e) => handleSubmit(e)}>
                     <div className='content__allFields__form__fieldContainer'>
                         <label className='content__allFields__form__fieldContainer__name'>First Name</label>
-                        <input className='content__allFields__form__fieldContainer__name__input-first' type='text' data-id={''} name='firstname' id='firstname' placeholder='First Name' required/>
+                        <input className='content__allFields__form__fieldContainer__name__input-first' type='text' value={addEmpDetails.firstname} onChange={handleOnchange} name='firstname' id='firstname' placeholder='First Name' required/>
                     </div>
                     <div className='content__allFields__form__fieldContainer'>
                         <label className='content__allFields__form__fieldContainer__name'>Last Name</label>
-                        <input className='content__allFields__form__fieldContainer__name__input-last' type='text' name='lastname' id='lastname' placeholder='Last Name' required/>
+                        <input className='content__allFields__form__fieldContainer__name__input-last' type='text' value={addEmpDetails.lastname} onChange={handleOnchange} name='lastname' id='lastname' placeholder='Last Name' required/>
                     </div>
                     <div className='content__allFields__form__fieldContainer'>
                         <label className='content__allFields__form__fieldContainer__name'>Age</label>
-                        <input className='content__allFields__form__fieldContainer__name__input-age' type='number' name='age' id='age' placeholder='Age' required/>
+                        <input className='content__allFields__form__fieldContainer__name__input-age' type='number' value={addEmpDetails.age} onChange={handleOnchange} name='age' id='age' placeholder='Age' required/>
                     </div>
                     <input className='content__allFields__form__fieldContainer__submit-button' type='submit'/>
                 </form>
